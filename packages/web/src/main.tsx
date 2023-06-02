@@ -14,8 +14,8 @@ Amplify.configure({
     endpoints: [
       {
         name: 'api',
+        region: 'ap-southeast-1',
         endpoint: import.meta.env.VITE_APP_API_URL,
-        region: import.meta.env.VITE_APP_REGION,
       },
     ],
   },

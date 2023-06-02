@@ -1,0 +1,1 @@
+export const UserNotConfirmedException = 'User is not confirmed';

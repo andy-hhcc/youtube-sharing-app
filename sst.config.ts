@@ -4,7 +4,7 @@ import { YoutubeSharingStack } from "./stacks/MyStack";
 export default {
   config(_input) {
     return {
-      name: "sharing-youtube-app",
+      name: "youtube-sharing-app",
       region: "ap-southeast-1",
     };
   },

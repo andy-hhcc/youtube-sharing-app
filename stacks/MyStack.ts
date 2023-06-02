@@ -38,11 +38,15 @@ export const YoutubeSharingStack = ({ stack }: StackContext) => {
     buildCommand: 'npm run build',
     environment: {
       VITE_APP_API_URL: api.url,
+      VITE_APP_USER_POOL_ID: auth.userPoolId,
+      VITE_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
     },
   })
 
   stack.addOutputs({
     ApiEndpoint: api.url,
-    WebEndpoint: web.url,
+    UserPoolId: auth.userPoolId,
+    UserPoolClientId: auth.userPoolClientId,
+    WebUrl: web.url,
   })
 }
