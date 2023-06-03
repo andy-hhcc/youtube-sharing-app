@@ -1,9 +1,25 @@
-import { StackContext, Api, StaticSite, Cognito } from 'sst/constructs'
+import {
+  StackContext,
+  Api,
+  StaticSite,
+  Cognito,
+  Table,
+  WebSocketApi,
+} from 'sst/constructs'
 
 export const YoutubeSharingStack = ({ stack }: StackContext) => {
   // Create user_pool
   const auth = new Cognito(stack, 'auth', {
     login: ['email'],
+  })
+
+  // Create database
+  const table = new Table(stack, 'table', {
+    fields: {
+      pk: 'string',
+      sk: 'string',
+    },
+    primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
   })
 
   // Create Api
@@ -19,13 +35,13 @@ export const YoutubeSharingStack = ({ stack }: StackContext) => {
     },
     defaults: {
       authorizer: 'jwt',
+      function: {
+        bind: [table],
+      },
     },
     routes: {
-      'GET /private': 'packages/functions/src/lambda.handler',
-      'GET /public': {
-        function: 'packages/functions/src/lambda.handler',
-        authorizer: 'none',
-      },
+      'GET /videos': 'packages/functions/src/workers/getVideos.handler',
+      'POST /videos': 'packages/functions/src/workers/shareVideo.handler',
     },
   })
 

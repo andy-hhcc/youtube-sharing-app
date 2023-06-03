@@ -6,6 +6,7 @@
   "scripts": {
     "dev:api": "sst dev",
     "dev:web": "cd packages/web && sst bind vite",
+    "test": "sst bind vitest run",
     "build": "sst build",
     "deploy": "sst deploy",
     "remove": "sst remove",
@@ -17,6 +18,7 @@
     "aws-cdk-lib": "2.79.1",
     "constructs": "10.1.156",
     "typescript": "^5.0.4",
+    "vitest": "0.31.4",
     "@tsconfig/node16": "^1.0.4"
   },
   "workspaces": [
