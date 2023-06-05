@@ -1,10 +1,9 @@
 import reactLogo from '../../assets/react.svg'
-import { useAuth, useUser } from '../../hooks'
+import { useAuth } from '../../hooks'
 import { Authentication } from '../Authentication'
 import { Profile } from '../Profile'
 
-export const Heading = () => {
-  const { user } = useUser()
+export const Heading = ({ user }: any) => {
   const { logout } = useAuth()
 
   return (

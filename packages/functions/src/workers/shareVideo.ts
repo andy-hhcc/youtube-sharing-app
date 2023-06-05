@@ -1,30 +1,46 @@
-import { ApiHandler } from 'sst/node/api'
-import { Video } from '@youtube-sharing-app/core/domains'
-import { getYouTubeVideoId } from '@youtube-sharing-app/core/utils'
-import axios from 'axios'
-import { createVideo } from 'src/dal'
+import { createVideo, getConnections, deleteConnection } from 'src/dal'
 import { Table } from 'sst/node/table'
+import { SQSEvent } from 'aws-lambda'
+import { WebSocketApi } from 'sst/node/websocket-api'
+import { ApiGatewayManagementApi } from 'aws-sdk'
 
-const parserURL = 'https://www.youtube.com/oembed?url=parser_url&format=json'
+export const handler = async (event: SQSEvent) => {
+  const records: any[] = event.Records
+  const record = JSON.parse(records[0].body)
 
-export const handler = ApiHandler(async event => {
-  const data = JSON.parse(event?.body || '{}') as unknown as Video
+  try {
+    const tableName = Table.table.tableName
 
-  const videoId = getYouTubeVideoId(data.url)
-  const response = await axios.get(parserURL.replace('parser_url', data.url))
-  const youtubeData = response.data
-  
-  const video = await createVideo({
-    tableName: Table.table.tableName,
-    video: {
-      ...data,
-      title: youtubeData?.title || '',
-      videoId,
-    },
-  })
-  
-  return {
-    statusCode: 201,
-    body: JSON.stringify(video),
+    const connections = await getConnections({
+      tableName,
+    })
+    const filterdConnections = connections.filter(
+      connection => connection.userId !== record.sentBy,
+    )
+
+    const apiGW = new ApiGatewayManagementApi({
+      endpoint: WebSocketApi.webSocketApi.url.replace('wss://', ''),
+    })
+
+    const postToConnection = async (connectionId: string) => {
+      try {
+        if (!connectionId) return
+        await apiGW
+          .postToConnection({
+            ConnectionId: connectionId,
+            Data: JSON.stringify(record.detail),
+          })
+          .promise()
+      } catch (e: any) {
+        if (e.statusCode === 410) {
+          await deleteConnection({ tableName, connectionId })
+        }
+      }
+    }
+    await Promise.all(filterdConnections.map(item => postToConnection(item.id)))
+  } catch (err) {
+    console.log(err)
   }
-})
+
+  return {}
+}

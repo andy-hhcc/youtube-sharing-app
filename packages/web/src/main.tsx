@@ -17,6 +17,11 @@ Amplify.configure({
         region: 'ap-southeast-1',
         endpoint: import.meta.env.VITE_APP_API_URL,
       },
+      {
+        name: 'webSocketApi',
+        region: 'ap-southeast-1',
+        endpoint: import.meta.env.VITE_APP_WEB_SOCKET_API_URL,
+      },
     ],
   },
 })
