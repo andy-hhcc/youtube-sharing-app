@@ -9,10 +9,11 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",
     "@types/node": "^20.2.5",
+    "@types/uuid": "^9.0.1",
     "sst": "^2.11.5"
   },
   "dependencies": {
-    "@types/uuid": "^9.0.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "axios": "*"
   }
 }

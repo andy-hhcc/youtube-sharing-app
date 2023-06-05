@@ -5,6 +5,8 @@ export const videoMapper = (model: VideoModel): Video => {
   return {
     id: model.id,
     url: model.url,
+    videoId: model.videoId,
+    title: model.title,
     createdBy: model.createdBy,
   }
 }

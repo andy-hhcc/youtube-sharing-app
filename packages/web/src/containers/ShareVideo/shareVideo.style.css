@@ -1,0 +1,21 @@
+.share-modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-modal .form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 4px;
+}
+
+.share-modal .form .button-group {
+  justify-content: end;
+  display: flex;
+  gap: 4px;
+}

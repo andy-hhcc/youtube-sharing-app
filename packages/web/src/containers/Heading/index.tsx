@@ -6,6 +6,7 @@ import { Profile } from '../Profile'
 export const Heading = () => {
   const { user } = useUser()
   const { logout } = useAuth()
+
   return (
     <div className="heading">
       <img src={reactLogo} className="logo react" alt="React logo" />

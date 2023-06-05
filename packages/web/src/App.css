@@ -35,8 +35,16 @@
 .heading {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.heading .profile {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 .heading img {
   width: 40px;
   height: 40px;
 }
+

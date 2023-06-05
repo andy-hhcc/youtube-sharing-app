@@ -1,8 +1,10 @@
-export const Profile = ({ user, share, logout }: any) => {
+import { ShareVideo } from "../ShareVideo"
+
+export const Profile = ({ user, logout }: any) => {
   return (
     <div className="profile">
       <span>Welcome {user?.attributes?.email || ''}</span>
-      <button onClick={share}>Share a movie</button>
+      <ShareVideo user={user} />
       <button onClick={logout}>Logout</button>
     </div>
   )

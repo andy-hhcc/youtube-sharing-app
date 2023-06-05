@@ -1,0 +1,41 @@
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  align-items: center;
+}
+
+.video {
+  margin-right: 20px;
+  flex: 1;
+}
+
+.info {
+  flex: 1;
+  padding: 16px;
+  text-align: left;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem;
+  color: #888;
+}
+
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column;
+  }
+
+  .video {
+    margin-right: 0;
+  }
+
+  .info {
+    flex: 1 0 auto;
+  }
+}
