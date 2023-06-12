@@ -1,8 +1,3 @@
-## Introduce
-Hi, I am Andy.
-Firstly, I would like to express my gratitude for giving me the opportunity to interview with the company.
-
-Although I am a bit disappointed that I didn't have enough time to complete the test as requested, over the past week, my current company has experienced several production issues, and I have dedicated a significant amount of time to help resolve them. This is not an excuse but rather a sharing of my situation. Honestly, I really want to find a new environment, but I couldn't take a few days off to complete the test more effectively. I deeply regret this and hope that the company can consider giving me another chance. Thank you.
 
 ## Prerequisites​
 
